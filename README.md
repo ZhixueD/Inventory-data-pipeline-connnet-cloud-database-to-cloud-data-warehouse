@@ -10,7 +10,7 @@ The whole configurations may involve the following steps:
 
 1. Set up Google cloud SQL for MySQL Server database
 2. load data to Cloud SQL from Google cloud storage
-3. Create and run a Cloud Data Fusion Replication job
+3. Create and run a Cloud Data Fusion ETL job
 4. View the results in BigQuery
 
 ## 1. Set up Google cloud SQL for MySQL Server database
@@ -140,13 +140,100 @@ The whole configurations may involve the following steps:
       
   ![import data](https://user-images.githubusercontent.com/98153604/151032628-18564a8a-be34-4850-afdb-3ed6e40cf8a0.JPG)
   
-  ## 3. Create and run a Cloud Data Fusion Replication job
+  ## 3. Create and run a Cloud Data Fusion ETL job
+  
+  ![pipeline2](https://user-images.githubusercontent.com/98153604/151041579-b73823cd-73b8-4e97-a99a-b7bc9758d426.JPG)
+
   
   (1). Enable data fusion API
   
   ![image](https://user-images.githubusercontent.com/98153604/151033425-9ce30e77-aa77-40e1-8efe-4b789ef1a025.png)
   
-  (2) 
+  (2). Create a Cloud Data Fusion instance
+  
+      Select Basic for the Edition type.
+      Under Authorization section, click Grant Permission.
+      
+  ![datafusion3 instance](https://user-images.githubusercontent.com/98153604/151036674-688ed51e-1a4c-45c1-8e7f-6643e3fc62ba.JPG)
+  
+  (3). Download the Driver to connect Cloud SQL for MySQL with Data Fusion
+  
+  ![hub JDBC Drivers and plugins](https://user-images.githubusercontent.com/98153604/151037046-9a968fb6-ab29-41bb-9814-e5c019782807.JPG)
+  ![hub JDBC Drivers and plugins2](https://user-images.githubusercontent.com/98153604/151037095-8e76172a-b223-4e89-914f-ca5163d374fa.JPG)
+  
+  (4). Config IAM to allowd Data Fusion connect Cloud SQL
+  
+  ![IAM](https://user-images.githubusercontent.com/98153604/151038104-b007d6a7-d4fc-4011-bcbe-678d2463e5c9.jpg)
+  
+  (5). Create a ETL work flow
+  
+  ![datafusion2](https://user-images.githubusercontent.com/98153604/151038325-4d15f4f0-3517-4687-b62d-50f334fde158.JPG)
+
+  click studio to generate a ETL pipeline:
+
+  first click cloud SQL MySQL
+     
+ ![studio2](https://user-images.githubusercontent.com/98153604/151038700-0e9f3e91-1cc9-45a4-b825-014e406ed714.JPG)
+ 
+     Config like:
+ ![cloud SQL connnect](https://user-images.githubusercontent.com/98153604/151038842-0a9a9efe-002b-47ce-b3b5-4602850c9036.JPG)
+ 
+ click Joinner, and do table left join
+ joiner:
+ ![joiner](https://user-images.githubusercontent.com/98153604/151039375-0355eeb2-e009-4de2-a08c-7885f04a8a26.JPG)
+ 
+ joiner1:
+ ![joiner1](https://user-images.githubusercontent.com/98153604/151039485-51585624-ec8d-462a-a14e-b359b030a7f0.JPG)
+ 
+ joiner2:
+  ![joiner2](https://user-images.githubusercontent.com/98153604/151039540-2b4ff573-cc51-4f45-a2b6-aa5732e6423d.JPG)
+
+The joined table have to do some data cleaning, here I use wangler to clean the data flow from mutiple left join steps:
+
+![wrangler](https://user-images.githubusercontent.com/98153604/151040032-a3432e1a-b672-473f-a158-f14dc26a165c.JPG)
+
+Here, I need to go to cloud bigquery to create a dataset and table, and set table schema for later data load.
+
+Bigquery:
+![bigquery](https://user-images.githubusercontent.com/98153604/151040186-d2072f99-7dfd-4cd8-b7a9-673e6e969d93.JPG)
+
+Bigquery execute: data saved in bigquery can directly using SQL syntax in Bigquery to do one step further cleaning, and data calculation to create a new table
+
+![bigquery execute2](https://user-images.githubusercontent.com/98153604/151041427-f7c8ec1a-cb97-40c9-957e-535f8f413f0f.JPG)
+
+After these steps, click Schedule for schedule the job:
+![schedule](https://user-images.githubusercontent.com/98153604/151041896-428e0fcb-f7cd-4575-a9fe-de315d4bbe71.JPG)
+
+Save the pipeline and deploy, and click Run, then the ETL job will start run on cloud:
+![pipeline](https://user-images.githubusercontent.com/98153604/151042130-4f9f0994-dafb-45fa-beba-8a427197bcd7.JPG)
+
+After succeeded, go to Bigquery, to check the saved cleaning data:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+     
+
+
+
+  
+  
+
 
 
   
