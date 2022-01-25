@@ -141,8 +141,6 @@ The whole configurations may involve the following steps:
   ![import data](https://user-images.githubusercontent.com/98153604/151032628-18564a8a-be34-4850-afdb-3ed6e40cf8a0.JPG)
   
   ## 3. Create and run a Cloud Data Fusion ETL job
-  
-  ![pipeline2](https://user-images.githubusercontent.com/98153604/151041579-b73823cd-73b8-4e97-a99a-b7bc9758d426.JPG)
 
   
   (1). Enable data fusion API
@@ -167,15 +165,17 @@ The whole configurations may involve the following steps:
   
   (5). Create a ETL work flow
   
-  ![datafusion2](https://user-images.githubusercontent.com/98153604/151038325-4d15f4f0-3517-4687-b62d-50f334fde158.JPG)
+ the ETL pipeline like this:
+ ![pipeline2](https://user-images.githubusercontent.com/98153604/151041579-b73823cd-73b8-4e97-a99a-b7bc9758d426.JPG)
 
   click studio to generate a ETL pipeline:
+  ![datafusion2](https://user-images.githubusercontent.com/98153604/151038325-4d15f4f0-3517-4687-b62d-50f334fde158.JPG)
 
   first click cloud SQL MySQL
      
  ![studio2](https://user-images.githubusercontent.com/98153604/151038700-0e9f3e91-1cc9-45a4-b825-014e406ed714.JPG)
  
-     Config like:
+ Config like:
  ![cloud SQL connnect](https://user-images.githubusercontent.com/98153604/151038842-0a9a9efe-002b-47ce-b3b5-4602850c9036.JPG)
  
  click Joinner, and do table left join
@@ -206,8 +206,24 @@ After these steps, click Schedule for schedule the job:
 
 Save the pipeline and deploy, and click Run, then the ETL job will start run on cloud:
 ![pipeline](https://user-images.githubusercontent.com/98153604/151042130-4f9f0994-dafb-45fa-beba-8a427197bcd7.JPG)
+![datafusion1](https://user-images.githubusercontent.com/98153604/151044061-e53ee358-0006-4cb7-a7a0-2c07111c20ab.JPG)
+
 
 After succeeded, go to Bigquery, to check the saved cleaning data:
+![bigquery](https://user-images.githubusercontent.com/98153604/151043787-6aff057d-61f5-4f24-9b90-db723aed404b.JPG)
+
+## 4. View the results in BigQuery
+
+connect BigQuery with Tableau for data visulization
+
+
+
+
+
+
+
+
+
 
 
 
