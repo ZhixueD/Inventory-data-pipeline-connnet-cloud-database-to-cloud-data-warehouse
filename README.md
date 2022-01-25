@@ -4,8 +4,12 @@
 
 ETL data pipeline for data from MySQL data base on cloud (cloud SQL) to BigQuery
 
+For business reason, database and data warehouse are both useful for a company to save, check, and study its inventory state.
+
 For those I wish to send Inventory data from MySQL database to BigQuery without coding for the pipeline design, I use leverage Google’s Cloud Data Fusion to accomplish this goal. 
-This pipeline can batch integration data from a Cloud MySQL Server database to a BigQuery table.
+This pipeline can integration batch data from a Cloud MySQL Server database to a BigQuery table.
+
+
 
 The whole configurations may involve the following steps:
 
