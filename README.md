@@ -3,6 +3,7 @@
 ![Picture1](https://user-images.githubusercontent.com/98153604/151009547-dbd113f8-968a-4ac2-9112-b16a2d69cc19.png)
 
 For business reason, database and data warehouse are both useful for a company to save, check, and study its inventory state, but they have different function. Here I use inventory data to create a database in google cloud SQL for MySQL server, and then create a ETL data pipeline for data from MySQL data base on cloud (cloud SQL) to BigQuery.
+Every product stock balance can be caculate and update in Bigquery automatically when Inventory database update.
 
 For those I wish to send Inventory data from MySQL database to BigQuery without coding for the pipeline design, I use leverage Google’s Cloud Data Fusion to accomplish this goal. 
 
@@ -132,11 +133,11 @@ The whole configurations may involve the following steps:
    
   ## 2. load data to Cloud SQL from Google cloud storage
       
-      1.first copy data to google cloud storage bucket
+  (1).first copy data to google cloud storage bucket
       
   ![google cloud storage](https://user-images.githubusercontent.com/98153604/151032350-2734020d-f0bc-419c-b113-abf995dcccab.JPG)
       
-      2. import data from google cloud storage bucket to cloud SQL database
+  (2). import data from google cloud storage bucket to cloud SQL database
       
   ![import data](https://user-images.githubusercontent.com/98153604/151032628-18564a8a-be34-4850-afdb-3ed6e40cf8a0.JPG)
   
@@ -212,9 +213,15 @@ Save the pipeline and deploy, and click Run, then the ETL job will start run on 
 After succeeded, go to Bigquery, to check the saved cleaning data:
 ![bigquery](https://user-images.githubusercontent.com/98153604/151043787-6aff057d-61f5-4f24-9b90-db723aed404b.JPG)
 
-## 4. View the results in BigQuery
+Here, I succussfully create a ETL pipeline, the bigqurey inventory product stock banlance can update automaticlly when database update.
+
+## 4. View the results in Tableau
 
 connect BigQuery with Tableau for data visulization
+
+Here I plot all the products stock balance every day
+![inventory stock balance Tableau](https://user-images.githubusercontent.com/98153604/151047881-e61d54d8-6217-4a1d-a38a-12de00c08d73.JPG)
+
 
 
 
