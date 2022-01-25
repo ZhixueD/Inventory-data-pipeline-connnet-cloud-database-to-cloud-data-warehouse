@@ -1,0 +1,106 @@
+CREATE DATABASE IF NOT EXISTS inventoryDB;
+USE inventoryDB;
+
+DROP TABLE IF EXISTS inventory_begining;
+DROP TABLE IF EXISTS inventory_calendar;
+DROP TABLE IF EXISTS product;
+DROP TABLE IF EXISTS units_in;
+DROP TABLE IF EXISTS units_out;
+
+
+CREATE TABLE inventory_begining (
+  ProductAlternateKey varchar(25) NOT NULL,
+  DateKey int,
+  UnitCost float,
+  UnitsBalance int);
+
+create table inventory_calendar (
+DateKey int,
+FullDateAlternateKey date,
+DayNumberOfWeek int,
+EnglishDayNameOfWeek varchar(10),
+DayNumberOfMonth int,	
+DayNumberOfYear int,
+WeekNumberOfYear int,
+EnglishMonthName varchar(10),
+MonthNumberOfYear int,
+CalendarQuarter int,	
+CalendarYear int,	
+CalendarSemester int,	
+FiscalQuarter int,	
+FiscalYear int,
+FiscalSemester int);
+
+create table product(
+ProductAlternateKey varchar(25),
+WeightUnitMeasureCode varchar(10) default 'LB',
+SizeUnitMeasureCode varchar(10) default 'CM',
+EnglishProductName text(50),
+StandardCost float, 
+Color text(15),
+SafetyStockLevel int,
+ReorderPoint int,
+ListPrice float,
+Size text(50),
+SizeRange text(50),
+Weight float,
+DaysToManufacture int,
+DealerPrice float,
+ModelName text(50),
+EnglishDescription text(400));
+
+
+create table units_in (
+DateKey int,
+ProductAlternateKey varchar(25),
+UnitCost float,
+UnitsIn int);
+
+create table units_out (
+DateKey int,
+ProductAlternateKey varchar(25),
+UnitCost float,
+UnitsOut int);
+
+
+create view inventory_list as select product.*, inventory_calendar.*
+from product
+cross join inventory_calendar;
+
+
+alter table product 
+add primary key (ProductAlternateKey);
+
+alter table inventory_calendar
+add primary key (DateKey);
+
+
+ALTER TABLE inventory_begining
+ADD FOREIGN KEY (ProductAlternateKey) REFERENCES product (ProductAlternateKey);
+
+ALTER TABLE inventory_begining
+ADD FOREIGN KEY (DateKey) REFERENCES inventory_calendar(DateKey);
+
+ALTER TABLE units_in
+ADD FOREIGN KEY (ProductAlternateKey) REFERENCES product (ProductAlternateKey);
+
+ALTER TABLE units_in
+ADD FOREIGN KEY (DateKey) REFERENCES inventory_calendar (DateKey);
+
+ALTER TABLE units_out
+ADD FOREIGN KEY (ProductAlternateKey) REFERENCES product (ProductAlternateKey);
+
+ALTER TABLE units_out
+ADD FOREIGN KEY (DateKey) REFERENCES inventory_calendar (DateKey);
+
+
+
+# SQL syntax for data pipeline  Bigquery execute step
+
+SELECT *,
+FIRST_VALUE(UnitsBalance) OVER (partition by productalternatekey ORDER BY datekey ) 
++ sum(unitsin - UnitsOut) OVER (partition by productalternatekey ORDER BY datekey )
+ AS current_balance
+FROM 	`t-osprey-337221.inventory.inventory_in_out2`
+ORDER BY ProductAlternateKey, datekey;
+
