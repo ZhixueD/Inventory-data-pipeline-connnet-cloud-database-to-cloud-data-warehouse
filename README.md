@@ -200,6 +200,13 @@ Bigquery:
 
 Bigquery execute: data saved in bigquery can directly using SQL syntax in Bigquery to do one step further cleaning, and data calculation to create a new table
 
+        SELECT *,
+        FIRST_VALUE(UnitsBalance) OVER (partition by productalternatekey ORDER BY datekey ) 
+         + sum(unitsin - UnitsOut) OVER (partition by productalternatekey ORDER BY datekey )
+         AS current_balance
+         FROM 	`t-osprey-337221.inventory.inventory_in_out2`
+         ORDER BY ProductAlternateKey, datekey;
+
 ![bigquery execute2](https://user-images.githubusercontent.com/98153604/151041427-f7c8ec1a-cb97-40c9-957e-535f8f413f0f.JPG)
 
 After these steps, click Schedule for schedule the job:
