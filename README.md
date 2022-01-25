@@ -8,12 +8,12 @@ For those I wish to send Inventory data from MySQL database to BigQuery without 
 
 The whole configurations may involve the following steps:
 
-1. Set up Google cloud SQL for MySQL Server database
+1. Set up Google cloud SQL for MySQL Server database, and create a database
 2. load data to Cloud SQL from Google cloud storage
 3. Create and run a Cloud Data Fusion ETL job
 4. View the results in BigQuery
 
-## 1. Set up Google cloud SQL for MySQL Server database
+## 1. Set up Google cloud SQL for MySQL Server database, and create a database
 
 (1) Create a Cloud SQL instance
 
