@@ -126,6 +126,32 @@ The whole configurations may involve the following steps:
 
       ALTER TABLE units_out
       ADD FOREIGN KEY (DateKey) REFERENCES inventory_calendar (DateKey);
+      
+   I connect Google cloud SQL with local MySQL workbenth, and get the ERD for database inventoryDB:
+   ![database ERD](https://user-images.githubusercontent.com/98153604/151031746-65b11670-3469-4e83-b0ac-88533752019f.JPG)\
+   
+  ## 2. load data to Cloud SQL from Google cloud storage
+      
+      1.first copy data to google cloud storage bucket
+      
+  ![google cloud storage](https://user-images.githubusercontent.com/98153604/151032350-2734020d-f0bc-419c-b113-abf995dcccab.JPG)
+      
+      2. import data from google cloud storage bucket to cloud SQL database
+      
+  ![import data](https://user-images.githubusercontent.com/98153604/151032628-18564a8a-be34-4850-afdb-3ed6e40cf8a0.JPG)
+  
+  ## 3. Create and run a Cloud Data Fusion Replication job
+  
+  (1). Enable data fusion API
+  
+  ![image](https://user-images.githubusercontent.com/98153604/151033425-9ce30e77-aa77-40e1-8efe-4b789ef1a025.png)
+  
+  (2) 
+
+
+  
+
+
     
 
 
