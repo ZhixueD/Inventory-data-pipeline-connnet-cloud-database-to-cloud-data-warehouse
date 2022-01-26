@@ -1,6 +1,6 @@
 # Integration inventory data from Google Cloud SQL database to BigQuery using Google Cloud Data Fusion
 
-![Picture1](https://user-images.githubusercontent.com/98153604/151009547-dbd113f8-968a-4ac2-9112-b16a2d69cc19.png)
+![whole process](https://user-images.githubusercontent.com/98153604/151255830-ae47f9d9-9435-458d-bcbc-194b22549a47.png)
 
 For business reason, database and data warehouse are both useful for a company to save, check, and study its inventory state, but they have different function. Here I use inventory data to create a database in google cloud SQL for MySQL server, and then create a ETL data pipeline for data from MySQL data base on cloud (cloud SQL) to BigQuery.
 Every product stock balance can be caculate and update in Bigquery automatically when Inventory database update.
