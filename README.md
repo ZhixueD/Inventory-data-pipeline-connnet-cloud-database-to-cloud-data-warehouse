@@ -5,7 +5,7 @@
 For business reason, database and data warehouse are both useful for a company to save, check, and study its inventory state, but they have different function. Here I use inventory data to create a database in google cloud SQL for MySQL server, and then create a ETL data pipeline for data from MySQL data base on cloud (cloud SQL) to BigQuery.
 Every product stock balance can be caculate and update in Bigquery automatically when Inventory database update.
 
-For those I wish to send Inventory data from MySQL database to BigQuery without coding for the pipeline design, I use leverage Google’s Cloud Data Fusion to accomplish this goal. 
+Here, I send Inventory data from MySQL database to BigQuery without coding for the pipeline design, I use leverage Google’s Cloud Data Fusion to accomplish this goal. 
 
 The whole configurations may involve the following steps:
 
